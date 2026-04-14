@@ -1,9 +1,10 @@
 package com.kirkhi.fermented_fortress.fermentation.domain.model.ingredient;
 
+import com.kirkhi.fermented_fortress.common.domain.Result;
+import com.kirkhi.fermented_fortress.common.domain.ValidationError;
+import com.kirkhi.fermented_fortress.fermentation.domain.exception.DomainValidationException;
 import com.kirkhi.fermented_fortress.fermentation.domain.model.enums.IngredientType;
 import com.kirkhi.fermented_fortress.fermentation.domain.model.enums.Unit;
-import com.kirkhi.fermented_fortress.fermentation.domain.exception.DomainValidationException;
-
 
 public class Ingredient {
 
@@ -13,10 +14,7 @@ public class Ingredient {
 	private IngredientType ingredientType;
 	private String notes;
 
-	public Ingredient(Long id, String name, Unit defaultUnit, IngredientType ingredientType, String notes) {
-		if (name == null || name.isBlank()) {
-			throw new DomainValidationException("Ingredient name is required");
-		}
+	private Ingredient(Long id, String name, Unit defaultUnit, IngredientType ingredientType, String notes) {
 		this.id = id;
 		this.name = name;
 		this.defaultUnit = defaultUnit;
@@ -24,51 +22,33 @@ public class Ingredient {
 		this.notes = notes;
 	}
 
-	public Ingredient(String name, Unit defaultUnit, IngredientType ingredientType, String notes) {
-		this(null, name, defaultUnit, ingredientType, notes);
+	public static Result<Ingredient> create(String name, Unit defaultUnit, IngredientType ingredientType,
+			String notes) {
+		if (name == null || name.isBlank()) {
+			return Result.failure(new ValidationError("Ingredient name is required"));
+		}
+		Ingredient ingredient = new Ingredient(null, name, defaultUnit, ingredientType, notes);
+		return Result.success(ingredient);
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		if (name == null || name.isBlank()) {
-			throw new DomainValidationException("Ingredient name is required");
-		}
-		this.name = name;
 	}
 
 	public Unit getDefaultUnit() {
 		return defaultUnit;
 	}
 
-	public void setDefaultUnit(Unit defaultUnit) {
-		this.defaultUnit = defaultUnit;
-	}
-
 	public IngredientType getIngredientType() {
 		return ingredientType;
 	}
 
-	public void setIngredientType(IngredientType ingredientType) {
-		this.ingredientType = ingredientType;
-	}
-
 	public String getNotes() {
 		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
 	}
 
 }
