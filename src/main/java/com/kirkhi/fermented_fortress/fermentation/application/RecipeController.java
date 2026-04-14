@@ -1,4 +1,4 @@
-package com.kirkhi.fermented_fortress.recipe.api;
+package com.kirkhi.fermented_fortress.fermentation.application;
 
 import java.util.List;
 
@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kirkhi.fermented_fortress.recipe.api.application.RecipeCommandService;
-import com.kirkhi.fermented_fortress.recipe.api.application.RecipeQueryService;
-import com.kirkhi.fermented_fortress.recipe.api.dto.RecipeDto;
+import com.kirkhi.fermented_fortress.fermentation.domain.RecipeCommandService;
+import com.kirkhi.fermented_fortress.fermentation.domain.RecipeQueryService;
 
 @RestController
 @RequestMapping("/api/recipes")
 public class RecipeController {
-	Logger logger = LoggerFactory.getLogger(RestController.class);
+	Logger logger = LoggerFactory.getLogger(RecipeController.class);
 	
 	private final RecipeCommandService recipeCommandService;
 	private final RecipeQueryService recipeQueryService;
