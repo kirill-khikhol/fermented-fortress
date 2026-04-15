@@ -6,11 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -24,23 +21,23 @@ public class GlobalExceptionHandler {
 				.body(new ErrorResponseDto("general Exception", e.getMessage(), LocalDateTime.now()));
 	}
 	
-	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity<ErrorResponseDto> handleNotFoundException(EntityNotFoundException e) {
-		logger.error("Handle Not Found Exception");
-		
-		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-				.body(new ErrorResponseDto("Entity Not Found", e.getMessage(), LocalDateTime.now()));
-	}
-	
-	@ExceptionHandler(exception = {
-			IllegalArgumentException.class,
-			IllegalStateException.class,
-			MethodArgumentNotValidException.class
-	})
-	public ResponseEntity<ErrorResponseDto> handleBadRequestException(EntityNotFoundException e) {
-		logger.error("Handle Bad Request Exception");
-		
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body(new ErrorResponseDto("Bad Request", e.getMessage(), LocalDateTime.now()));
-	}
+//	@ExceptionHandler(EntityNotFoundException.class)
+//	public ResponseEntity<ErrorResponseDto> handleNotFoundException(EntityNotFoundException e) {
+//		logger.error("Handle Not Found Exception");
+//		
+//		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//				.body(new ErrorResponseDto("Entity Not Found", e.getMessage(), LocalDateTime.now()));
+//	}
+//	
+//	@ExceptionHandler(exception = {
+//			IllegalArgumentException.class,
+//			IllegalStateException.class,
+//			MethodArgumentNotValidException.class
+//	})
+//	public ResponseEntity<ErrorResponseDto> handleBadRequestException(EntityNotFoundException e) {
+//		logger.error("Handle Bad Request Exception");
+//		
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//				.body(new ErrorResponseDto("Bad Request", e.getMessage(), LocalDateTime.now()));
+//	}
 }
