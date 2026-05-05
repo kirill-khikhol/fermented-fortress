@@ -13,7 +13,7 @@ class IngredientTest {
 
     @Test
     void createSuccess() {
-        Result<Ingredient> result = Ingredient.create("Salt", Unit.GRAM, IngredientType.SOLID, "table salt");
+        Result<Ingredient> result = Ingredient.create(null, "Salt", Unit.GRAM, IngredientType.SOLID, "table salt");
 
         assertTrue(result.isSuccess(), "Result should be success for valid ingredient");
         Ingredient ingredient = result.getValue();
@@ -27,7 +27,7 @@ class IngredientTest {
 
     @Test
     void createFailsWhenNameIsNull() {
-        Result<Ingredient> result = Ingredient.create(null, Unit.LITER, IngredientType.LIQUID, null);
+        Result<Ingredient> result = Ingredient.create(null, null, Unit.LITER, IngredientType.LIQUID, null);
 
         assertFalse(result.isSuccess(), "Result should be failure when name is null");
         assertNotNull(result.getDomainError());
@@ -37,7 +37,7 @@ class IngredientTest {
 
     @Test
     void createFailsWhenNameIsBlank() {
-        Result<Ingredient> result = Ingredient.create("   ", Unit.MILLILITER, IngredientType.LIQUID, "notes");
+        Result<Ingredient> result = Ingredient.create(null, "   ", Unit.MILLILITER, IngredientType.LIQUID, "notes");
 
         assertFalse(result.isSuccess(), "Result should be failure when name is blank");
         assertNotNull(result.getDomainError());

@@ -36,15 +36,15 @@ public class IngredientController {
 		return ResponseEntity.ok(ingredientService.create(ingredientDto));
 	}
 
-	@DeleteMapping("/id")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
 		ingredientService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 
-	@PutMapping("/id")
+	@PutMapping("/{id}")
 	public ResponseEntity<IngredientDto> update(@PathVariable Long id, @RequestBody IngredientDto ingredientDto) {
-		return ResponseEntity.ok(ingredientService.update(ingredientDto));
+		return ResponseEntity.ok(ingredientService.update(id, ingredientDto));
 	}
 
 	@GetMapping("/id")

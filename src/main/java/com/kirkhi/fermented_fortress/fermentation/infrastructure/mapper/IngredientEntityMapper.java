@@ -6,12 +6,18 @@ import com.kirkhi.fermented_fortress.fermentation.infrastructure.entities.Ingred
 public class IngredientEntityMapper {
 
 	public static Ingredient toDomain(IngredientEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		Ingredient ingredient = Ingredient.create(entity.getId(), entity.getName(), entity.getDefaultUnit(),
+				entity.getIngredientType(), entity.getNotes()).getValue();
+		return ingredient;
 	}
 
 	public static IngredientEntity toEntity(Ingredient ingredient) {
-		// TODO Auto-generated method stub
-		return null;
+		IngredientEntity entity = new IngredientEntity();
+		entity.setId(ingredient.getId());
+		entity.setName(ingredient.getName());
+		entity.setDefaultUnit(ingredient.getDefaultUnit());
+		entity.setIngredientType(ingredient.getIngredientType());
+		entity.setNotes(ingredient.getNotes());
+		return entity;
 	}
 }

@@ -2,7 +2,6 @@ package com.kirkhi.fermented_fortress.fermentation.domain.model.ingredient;
 
 import com.kirkhi.fermented_fortress.common.domain.Result;
 import com.kirkhi.fermented_fortress.common.domain.ValidationError;
-import com.kirkhi.fermented_fortress.fermentation.domain.exception.DomainValidationException;
 import com.kirkhi.fermented_fortress.fermentation.domain.model.enums.IngredientType;
 import com.kirkhi.fermented_fortress.fermentation.domain.model.enums.Unit;
 
@@ -22,12 +21,12 @@ public class Ingredient {
 		this.notes = notes;
 	}
 
-	public static Result<Ingredient> create(String name, Unit defaultUnit, IngredientType ingredientType,
+	public static Result<Ingredient> create(Long id, String name, Unit defaultUnit, IngredientType ingredientType,
 			String notes) {
 		if (name == null || name.isBlank()) {
 			return Result.failure(new ValidationError("Ingredient name is required"));
 		}
-		Ingredient ingredient = new Ingredient(null, name, defaultUnit, ingredientType, notes);
+		Ingredient ingredient = new Ingredient(id, name, defaultUnit, ingredientType, notes);
 		return Result.success(ingredient);
 	}
 

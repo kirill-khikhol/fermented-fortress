@@ -8,21 +8,19 @@ import com.kirkhi.fermented_fortress.fermentation.domain.model.ingredient.Ingred
 public class IngredientDtoMapper {
 
 	public static Ingredient toDomain(IngredientDto dto) {
-		Ingredient ingredient = Ingredient.create(dto.getName(), 
-				Unit.valueOf(dto.getDefaultUnit()), 
-				IngredientType.valueOf(dto.getIngredientType()), 
-				dto.getNotes()).getValue();
+		Ingredient ingredient = Ingredient.create(dto.getId(), dto.getName(), Unit.valueOf(dto.getDefaultUnit()),
+				IngredientType.valueOf(dto.getIngredientType()), dto.getNotes()).getValue();
 		return ingredient;
 	}
-	
+
 	public static IngredientDto toDto(Ingredient ingredient) {
 		IngredientDto dto = new IngredientDto();
+		dto.setId(ingredient.getId());
 		dto.setName(ingredient.getName());
 		dto.setDefaultUnit(ingredient.getDefaultUnit().name());
 		dto.setIngredientType(ingredient.getIngredientType().name());
 		dto.setNotes(ingredient.getNotes());
 		return dto;
 	}
-	
-	
+
 }
