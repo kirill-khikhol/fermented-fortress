@@ -1,6 +1,7 @@
 package com.kirkhi.fermented_fortress.fermentation.domain.model.recipe;
 
 import com.kirkhi.fermented_fortress.common.domain.Result;
+import com.kirkhi.fermented_fortress.common.domain.ValidationError;
 import com.kirkhi.fermented_fortress.fermentation.domain.model.enums.Unit;
 import com.kirkhi.fermented_fortress.fermentation.domain.model.ingredient.Ingredient;
 
@@ -24,6 +25,15 @@ public class RecipeIngredient {
 
 	public static Result<RecipeIngredient> create(float quantity, Unit unit, String preparationNotes, boolean optional,
 			Ingredient ingredient) {
+		if (quantity <= 0) {
+			return Result.failure(new ValidationError("Quantity must be greater than 0"));
+		}
+		if (unit == null) {
+			return Result.failure(new ValidationError("Unit is required"));
+		}
+		if (ingredient == null) {
+			return Result.failure(new ValidationError("Ingredient is required"));
+		}
 		RecipeIngredient recipeIngredient = new RecipeIngredient(null, quantity, unit, preparationNotes, optional,
 				ingredient);
 		return Result.success(recipeIngredient);
@@ -53,5 +63,4 @@ public class RecipeIngredient {
 		return ingredient;
 	}
 
-	
 }
